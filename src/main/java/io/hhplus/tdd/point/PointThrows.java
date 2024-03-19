@@ -1,4 +1,4 @@
-package io.hhplus.tdd;
+package io.hhplus.tdd.point;
 
 public class PointThrows extends RuntimeException{
 }

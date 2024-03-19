@@ -2,9 +2,7 @@ package io.hhplus.tdd;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
-import io.hhplus.tdd.point.PointHistory;
-import io.hhplus.tdd.point.TransactionType;
-import io.hhplus.tdd.point.UserPoint;
+import io.hhplus.tdd.point.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,13 +10,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PointTest {
     private PointService pointService;
 
     @BeforeEach
     void setUp(){
-        pointService = new PointService(
+        this.pointService = new PointService(
                 new UserPointTable(),
                 new PointHistoryTable());
     }
@@ -40,6 +39,7 @@ public class PointTest {
         UserPoint afterUserPoint2 = pointService.selectPointById(1L);
         //then
         assertEquals(4L,afterUserPoint2.point());
+        assertThat(afterUserPoint2.point()).isEqualTo(4L);
     }
 
     /**
