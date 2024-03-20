@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * PointService 테스트
+ */
 public class PointTest {
     private PointService pointService;
 
@@ -88,16 +91,26 @@ public class PointTest {
      */
     @Test
     void Id가_있을_때() throws InterruptedException {
+        //given
         pointService.insertUser(2L,3L);
+        //when
         UserPoint userPoint = pointService.selectPointById(2L);
+        //then
         assertEquals(3L, userPoint.point());
     }
 
+    /**
+     * 포인트 History를 조회한다.
+     * @throws InterruptedException
+     */
     @Test
     void 포인트_내역_조회() throws InterruptedException {
+        //given
         pointService.charge(1L,2L);
         pointService.usePoint(1L,1L);
+        //when
         List<PointHistory> list = pointService.pointHistories(1L);
+        //then
         assertEquals(TransactionType.CHARGE,list.get(0).type());
         assertEquals(TransactionType.USE,list.get(1).type());
     }
